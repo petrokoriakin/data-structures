@@ -3,10 +3,11 @@ class DynamicArray
   attr_accessor :len, :capacity, :arr
 
   def initialize(size = 16)
-    raise "Illegal capacity: #{capacity}" if size < 0
-    capacity = size
-    puts "initialized! the capacity is #{capacity}"
-    arr = Array.new(capacity)
+    raise "Illegal capacity: #{size}" if size < 0
+
+    @capacity = size
+    @len = 0
+    @arr = Array.new(capacity)
   end
 
   def size
@@ -14,7 +15,7 @@ class DynamicArray
   end
 
   def is_empty?
-    size == 0
+    len.zero?
   end
 
   def get(index)
@@ -27,7 +28,7 @@ class DynamicArray
 
   def clear!
     len.times { |index| arr[index] = nil }
-    len = nil
+    len = 0
   end
 
   def add(value)
@@ -90,8 +91,3 @@ class DynamicArray
     "[#{arr.join(',')}]"
   end
 end
-
-
-DynamicArray.new(20)
-
-
