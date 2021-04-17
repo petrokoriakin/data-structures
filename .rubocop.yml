@@ -14,3 +14,7 @@ require:
 
 AllCops:
   NewCops: enable
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*_spec.rb # nearly all spec files go over 25 lines
