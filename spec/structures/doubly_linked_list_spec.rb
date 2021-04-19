@@ -16,6 +16,20 @@ RSpec.describe Structures::DoublyLinkedList do
       end
     end
 
+    describe '#add_first' do
+      let(:new_item) { 42 }
+
+      before { empty_list.add_first(new_item) }
+
+      it 'adds an item to the head' do
+        expect(empty_list.peek_first).to eq(new_item)
+      end
+
+      it 'adds an item to the tails at the same time' do
+        expect(empty_list.peek_last).to eq(new_item)
+      end
+    end
+
     describe '#peek_last' do
       it 'raises an error' do
         expect { empty_list.peek_last }.to raise_error('Empty List')
@@ -73,6 +87,39 @@ RSpec.describe Structures::DoublyLinkedList do
 
     let(:first_item) { 13 }
     let(:last_item) { 69 }
+    let(:new_item) { 42 }
+
+    describe '#add_at' do
+      it 'raises an error for illegal index' do
+        expect { linked_list.add_at(-1) }.to raise_error('Illegal index')
+      end
+
+      it 'adds an item to the head' do
+        linked_list.add_at(0, new_item)
+        expect(linked_list.peek_first).to eq(new_item)
+      end
+
+      it 'adds an item to the tail' do
+        linked_list.add_at(linked_list.size, new_item)
+        expect(linked_list.peek_last).to eq(new_item)
+      end
+
+      it 'increases size' do
+        linked_list.add_at(1, new_item)
+        expect(linked_list.size).to eq(3)
+      end
+
+      it 'returns size' do
+        expect(linked_list.add_at(1, new_item)).to eq(3)
+      end
+    end
+
+    describe '#add_first' do
+      it 'adds an item to the head' do
+        linked_list.add_first(new_item)
+        expect(linked_list.peek_first).to eq(new_item)
+      end
+    end
 
     describe '#peek_first' do
       it 'returns first item' do

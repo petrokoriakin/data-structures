@@ -9,6 +9,7 @@ module Structures
 
     def initialize
       @size = 0
+      @head = @tail = nil
     end
 
     def clear!
@@ -51,15 +52,15 @@ module Structures
       @size += 1
     end
 
-    def add_at(index, item)
+    def add_at(index, item = nil)
       raise 'Illegal index' if index.negative?
 
       return add_first(item) if index.zero?
       return add_last(item) if index == @size
 
       temp = @head
-      index.times { temp = temp.next_node }
-      new_node = Node.new(item, temp, temp.next_node)
+      (index - 1).times { temp = temp.next_node }
+      new_node = Structures::LinkedList::Node.new(item, temp, temp.next_node)
       temp.next_node.prev_node = new_node
       temp.next_node = new_node
       @size += 1
@@ -77,6 +78,10 @@ module Structures
       @tail.data
     end
 
+    # Remove the first value at the head of the linked list, O(1)
     def remove_first; end
+
+    # Remove the last value at the tail of the linked list, O(1)
+    def remove_last; end
   end
 end
