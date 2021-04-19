@@ -36,6 +36,18 @@ RSpec.describe Structures::DoublyLinkedList do
       end
     end
 
+    describe '#remove_first' do
+      xit 'raises an error' do
+        expect { empty_list.remove_first }.to raise_error('Empty List')
+      end
+    end
+
+    describe '#remove_last' do
+      xit 'raises an error' do
+        expect { empty_list.remove_last }.to raise_error('Empty List')
+      end
+    end
+
     describe '#clear!' do
       it 'does nothing' do
         expect(empty_list.clear!).to eq(0)
@@ -75,6 +87,30 @@ RSpec.describe Structures::DoublyLinkedList do
         expect(single_node_list).to be_empty
       end
     end
+
+    xdescribe '#remove_first' do
+      before { single_node_list.remove_first }
+
+      it 'zeroes the size' do
+        expect(single_node_list.size).to eq(0)
+      end
+
+      it 'makes the list empty' do
+        expect(single_node_list).to be_empty
+      end
+    end
+
+    xdescribe '#remove_last' do
+      before { single_node_list.remove_last }
+
+      it 'zeroes the size' do
+        expect(single_node_list.size).to eq(0)
+      end
+
+      it 'makes the list empty' do
+        expect(single_node_list).to be_empty
+      end
+    end
   end
 
   context 'with reasonable nodes quantity' do
@@ -90,8 +126,12 @@ RSpec.describe Structures::DoublyLinkedList do
     let(:new_item) { 42 }
 
     describe '#add_at' do
-      it 'raises an error for illegal index' do
+      it 'raises an error for negative index' do
         expect { linked_list.add_at(-1) }.to raise_error('Illegal index')
+      end
+
+      it 'raises an error for overwhelming index' do
+        expect { linked_list.add_at(3) }.to raise_error('Illegal index')
       end
 
       it 'adds an item to the head' do

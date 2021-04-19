@@ -53,7 +53,7 @@ module Structures
     end
 
     def add_at(index, item = nil)
-      raise 'Illegal index' if index.negative?
+      raise 'Illegal index' if index.negative? || index > @size
 
       return add_first(item) if index.zero?
       return add_last(item) if index == @size
@@ -83,5 +83,23 @@ module Structures
 
     # Remove the last value at the tail of the linked list, O(1)
     def remove_last; end
+
+    # Remove an arbitrary node from the linked list, O(1)
+    def remove_node; end
+
+    # Remove a node at a particular index, O(n)
+    def remove_at; end
+
+    # Remove a particular value in the linked list, O(n)
+    def remove_value; end
+
+    # Find the index of a particular value in the linked list, O(n)
+    def index_of; end
+
+    # Check is a value is contained within the linked list
+    def contains?; end
+    alias containing? contains?
+
+    def to_string; end
   end
 end
