@@ -79,10 +79,26 @@ module Structures
     end
 
     # Remove the first value at the head of the linked list, O(1)
-    def remove_first; end
+    def remove_first
+      raise 'Empty List' if empty?
+
+      item = @head
+      @head = item.next_node
+      @head.prev_node = nil if @head
+      @size -= 1
+      item.data
+    end
 
     # Remove the last value at the tail of the linked list, O(1)
-    def remove_last; end
+    def remove_last
+      raise 'Empty List' if empty?
+
+      item = @tail
+      @tail = item.prev_node
+      @tail.next_node = nil if @tail
+      @size -= 1
+      item.data
+    end
 
     # Remove an arbitrary node from the linked list, O(1)
     def remove_node; end
@@ -94,12 +110,37 @@ module Structures
     def remove_value; end
 
     # Find the index of a particular value in the linked list, O(n)
-    def index_of; end
+    def index_of(value)
+      index = 0
+      trav = @head
+      while index < @size && !trav.nil?
+        return index if trav.data == value
+
+        trav = trav.next_node
+        index += 1
+      end
+
+      -1
+    end
 
     # Check is a value is contained within the linked list
-    def contains?; end
+    def contains?(value)
+      index_of(value) != -1
+    end
     alias containing? contains?
 
-    def to_string; end
+    def to_string
+      "[#{to_a.join(', ')}]"
+    end
+
+    def to_a
+      data_items = []
+      trav = @head
+      until trav.nil?
+        data_items << trav.data
+        trav = trav.next_node
+      end
+      data_items
+    end
   end
 end
