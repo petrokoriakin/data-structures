@@ -65,6 +65,12 @@ RSpec.describe Structures::DoublyLinkedList do
         expect(empty_list.to_string).to eq('[]')
       end
     end
+
+    describe '#to_a' do
+      it 'returns empty array' do
+        expect(empty_list.to_a).to eq([])
+      end
+    end
   end
 
   context 'with one node' do
@@ -137,6 +143,20 @@ RSpec.describe Structures::DoublyLinkedList do
     let(:last_item) { 69 }
     let(:another_item) { 42 }
 
+    describe 'remove_node' do
+      it 'removes the node in head' do
+        node = linked_list.head
+        linked_list.remove_node(node)
+        expect(linked_list).not_to be_containing(first_item)
+      end
+
+      it 'removes the node in tail' do
+        node = linked_list.tail
+        linked_list.remove_node(node)
+        expect(linked_list).not_to be_containing(last_item)
+      end
+    end
+
     describe '#add_at' do
       it 'raises an error for negative index' do
         expect { linked_list.add_at(-1) }.to raise_error('Illegal index')
@@ -201,7 +221,7 @@ RSpec.describe Structures::DoublyLinkedList do
         expect(linked_list).not_to be_containing(first_item)
       end
 
-      it 'returns last item' do
+      it 'returns first node data' do
         expect(linked_list.remove_first).to eq(first_item)
       end
     end
@@ -222,7 +242,7 @@ RSpec.describe Structures::DoublyLinkedList do
         expect(linked_list).not_to be_containing(last_item)
       end
 
-      it 'returns last item' do
+      it 'returns last node data' do
         expect(linked_list.remove_last).to eq(last_item)
       end
     end
@@ -264,6 +284,12 @@ RSpec.describe Structures::DoublyLinkedList do
     describe '#to_string' do
       it 'returns values in square braces' do
         expect(linked_list.to_string).to eq("[#{first_item}, #{last_item}]")
+      end
+    end
+
+    describe '#to_a' do
+      it 'returns values in array' do
+        expect(linked_list.to_a).to eq([first_item, last_item])
       end
     end
   end

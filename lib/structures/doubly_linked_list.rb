@@ -5,7 +5,7 @@ require 'structures/linked_list/node'
 module Structures
   # +Structures::DoublyLinkedList+ represents a doubly linked list
   class DoublyLinkedList
-    attr_accessor :size
+    attr_accessor :size, :head, :tail
 
     def initialize
       @size = 0
@@ -101,7 +101,16 @@ module Structures
     end
 
     # Remove an arbitrary node from the linked list, O(1)
-    def remove_node; end
+    def remove_node(node)
+      return remove_first if node.prev_node.nil?
+      return remove_last if node.next_node.nil?
+
+      node.prev_node.next_node = node.next_node
+      node.next_node.prev_node = node.prev_node
+      data = node.data
+      clear_node!(node)
+      data
+    end
 
     # Remove a node at a particular index, O(n)
     def remove_at; end
@@ -141,6 +150,10 @@ module Structures
         trav = trav.next_node
       end
       data_items
+    end
+
+    def clear_node!(node)
+      node.data = node.next_node = node.prev_node = nil
     end
   end
 end
