@@ -5,6 +5,8 @@ require 'structures/linked_list/node'
 module Structures
   # +Structures::DoublyLinkedList+ represents a doubly linked list
   class DoublyLinkedList
+    include Enumerable
+
     attr_accessor :size, :head, :tail
 
     def initialize
@@ -12,12 +14,19 @@ module Structures
       @head = @tail = nil
     end
 
+    def each
+      trav = @head
+      until trav.nil?
+        yield trav
+        trav = trav.next_node
+      end
+    end
+
     def clear!
       trav = @head
       until trav.nil?
         next_node = trav.next_node
-        trav.prev_node = trav.next_node = nil
-        trav.data = nil
+        trav.clear!
         trav = next_node
       end
       @head = @tail = nil
@@ -58,11 +67,7 @@ module Structures
       return add_first(item) if index.zero?
       return add_last(item) if index == @size
 
-      temp = @head
-      (index - 1).times { temp = temp.next_node }
-      new_node = Structures::LinkedList::Node.new(item, temp, temp.next_node)
-      temp.next_node.prev_node = new_node
-      temp.next_node = new_node
+      Structures::LinkedList::Node.insert_right_after(item, find_node_at(index - 1))
       @size += 1
     end
 
@@ -122,16 +127,7 @@ module Structures
 
     # Find the index of a particular value in the linked list, O(n)
     def index_of(value)
-      index = 0
-      trav = @head
-      while index < @size && !trav.nil?
-        return index if trav.data == value
-
-        trav = trav.next_node
-        index += 1
-      end
-
-      -1
+      find_index { |node| node.data == value } || -1
     end
 
     # Check is a value is contained within the linked list
@@ -157,13 +153,7 @@ module Structures
     private
 
     def find_node_by(value)
-      trav = @head
-      until trav.nil?
-        return trav if trav.data == value
-
-        trav = trav.next_node
-      end
-      nil
+      find { |node| node.data == value }
     end
 
     def find_node_at(target_index)
