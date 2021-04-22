@@ -106,12 +106,8 @@ module Structures
       return remove_first if node.prev_node.nil?
       return remove_last if node.next_node.nil?
 
-      node.prev_node.next_node = node.next_node
-      node.next_node.prev_node = node.prev_node
-      data = node.data
-      clear_node!(node)
       @size -= 1
-      data
+      node.remove!
     end
 
     # Remove a node at a particular index, O(n)
@@ -180,10 +176,6 @@ module Structures
         index += 1
       end
       nil
-    end
-
-    def clear_node!(node)
-      node.data = node.next_node = node.prev_node = nil
     end
   end
 end

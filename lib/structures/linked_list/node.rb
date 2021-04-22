@@ -15,6 +15,18 @@ module Structures
       def to_s
         data.to_s
       end
+
+      def remove!
+        @prev_node.next_node = @next_node
+        @next_node.prev_node = @prev_node
+        value = @data
+        clear!
+        value
+      end
+
+      def clear!
+        @data = @next_node = @prev_node = nil
+      end
     end
   end
 end
