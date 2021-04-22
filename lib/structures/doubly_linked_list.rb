@@ -102,6 +102,7 @@ module Structures
 
     # Remove an arbitrary node from the linked list, O(1)
     def remove_node(node)
+      return if node.nil?
       return remove_first if node.prev_node.nil?
       return remove_last if node.next_node.nil?
 
@@ -109,14 +110,19 @@ module Structures
       node.next_node.prev_node = node.prev_node
       data = node.data
       clear_node!(node)
+      @size -= 1
       data
     end
 
     # Remove a node at a particular index, O(n)
-    def remove_at; end
+    def remove_at(index)
+      remove_node(find_node_at(index))
+    end
 
     # Remove a particular value in the linked list, O(n)
-    def remove_value; end
+    def remove_value(value)
+      remove_node(find_node_by(value))
+    end
 
     # Find the index of a particular value in the linked list, O(n)
     def index_of(value)
@@ -150,6 +156,30 @@ module Structures
         trav = trav.next_node
       end
       data_items
+    end
+
+    private
+
+    def find_node_by(value)
+      trav = @head
+      until trav.nil?
+        return trav if trav.data == value
+
+        trav = trav.next_node
+      end
+      nil
+    end
+
+    def find_node_at(target_index)
+      index = 0
+      trav = @head
+      until trav.nil?
+        return trav if index == target_index
+
+        trav = trav.next_node
+        index += 1
+      end
+      nil
     end
 
     def clear_node!(node)

@@ -292,5 +292,43 @@ RSpec.describe Structures::DoublyLinkedList do
         expect(linked_list.to_a).to eq([first_item, last_item])
       end
     end
+
+    describe '#remove_value' do
+      before { linked_list.add_at(1, another_item) }
+
+      it 'removes an item from the list' do
+        linked_list.remove_value(another_item)
+        expect(linked_list).not_to be_containing(another_item)
+      end
+
+      it 'returns_value' do
+        expect(linked_list.remove_value(another_item)).to eq(another_item)
+      end
+
+      it 'reduces size' do
+        initial_size = linked_list.size
+        linked_list.remove_value(another_item)
+        expect(linked_list.size).to eq(initial_size - 1)
+      end
+    end
+
+    describe '#remove_at' do
+      before { linked_list.add_at(1, another_item) }
+
+      it 'removes an item from the list' do
+        linked_list.remove_at(1)
+        expect(linked_list).not_to be_containing(another_item)
+      end
+
+      it 'returns value' do
+        expect(linked_list.remove_at(1)).to eq(another_item)
+      end
+
+      it 'reduces size' do
+        initial_size = linked_list.size
+        linked_list.remove_at(1)
+        expect(linked_list.size).to eq(initial_size - 1)
+      end
+    end
   end
 end
