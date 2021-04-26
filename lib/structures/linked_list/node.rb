@@ -12,8 +12,26 @@ module Structures
         @next_node = next_node
       end
 
-      def to_s
+      def self.insert_right_after(data, target)
+        new_node = new(data, target, target.next_node)
+        target.next_node.prev_node = new_node
+        target.next_node = new_node
+      end
+
+      def to_string
         data.to_s
+      end
+
+      def remove!
+        @prev_node.next_node = @next_node
+        @next_node.prev_node = @prev_node
+        value = @data
+        clear!
+        value
+      end
+
+      def clear!
+        @data = @next_node = @prev_node = nil
       end
     end
   end
