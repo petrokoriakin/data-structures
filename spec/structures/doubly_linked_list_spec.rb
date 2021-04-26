@@ -65,12 +65,6 @@ RSpec.describe Structures::DoublyLinkedList do
         expect(empty_list.to_string).to eq('[]')
       end
     end
-
-    describe '#to_a' do
-      it 'returns empty array' do
-        expect(empty_list.to_a).to eq([])
-      end
-    end
   end
 
   context 'with one node' do
@@ -284,12 +278,6 @@ RSpec.describe Structures::DoublyLinkedList do
     describe '#to_string' do
       it 'returns values in square braces' do
         expect(linked_list.to_string).to eq("[#{first_item}, #{last_item}]")
-      end
-    end
-
-    describe '#to_a' do
-      it 'returns values in array' do
-        expect(linked_list.to_a).to eq([first_item, last_item])
       end
     end
 

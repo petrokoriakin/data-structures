@@ -23,12 +23,7 @@ module Structures
     end
 
     def clear!
-      trav = @head
-      until trav.nil?
-        next_node = trav.next_node
-        trav.clear!
-        trav = next_node
-      end
+      each(&:clear!)
       @head = @tail = nil
       @size = 0
     end
@@ -122,7 +117,7 @@ module Structures
 
     # Remove a particular value in the linked list, O(n)
     def remove_value(value)
-      remove_node(find_node_by(value))
+      remove_node(find { |node| node.data == value })
     end
 
     # Find the index of a particular value in the linked list, O(n)
@@ -131,40 +126,18 @@ module Structures
     end
 
     # Check is a value is contained within the linked list
-    def contains?(value)
+    def containing?(value)
       index_of(value) != -1
     end
-    alias containing? contains?
 
     def to_string
-      "[#{to_a.join(', ')}]"
-    end
-
-    def to_a
-      data_items = []
-      trav = @head
-      until trav.nil?
-        data_items << trav.data
-        trav = trav.next_node
-      end
-      data_items
+      "[#{map(&:data).join(', ')}]"
     end
 
     private
 
-    def find_node_by(value)
-      find { |node| node.data == value }
-    end
-
     def find_node_at(target_index)
-      index = 0
-      trav = @head
-      until trav.nil?
-        return trav if index == target_index
-
-        trav = trav.next_node
-        index += 1
-      end
+      each_with_index { |node, index| return node if index == target_index }
       nil
     end
   end
