@@ -12,13 +12,13 @@ RSpec.describe Structures::Queue do
 
     describe '#poll' do
       it 'raises an error' do
-        expect { empty_queue.poll }.to raise_error('Empty queue')
+        expect { empty_queue.poll }.to raise_error('Empty Queue')
       end
     end
 
     describe '#peek' do
       it 'raises an error' do
-        expect { empty_queue.peek }.to raise_error('Empty queue')
+        expect { empty_queue.peek }.to raise_error('Empty Queue')
       end
     end
   end
