@@ -12,13 +12,13 @@ RSpec.describe Structures::ListStack do
 
     describe '#pop' do
       it 'raises an error' do
-        expect { stack.pop }.to raise_error('Empty Stack')
+        expect { empty_stack.pop }.to raise_error('Empty Stack')
       end
     end
 
     describe '#peek' do
       it 'raises an error' do
-        expect { stack.peek }.to raise_error('Empty Stack')
+        expect { empty_stack.peek }.to raise_error('Empty Stack')
       end
     end
   end
@@ -40,8 +40,8 @@ RSpec.describe Structures::ListStack do
         expect { stack.push(another_item) }.to change(stack, :size).from(2).to(3)
       end
 
-      it 'returns an item' do
-        expect(stack.push(another_item)).to eq(another_item)
+      it 'returns updated size' do
+        expect(stack.push(another_item)).to eq(3)
       end
     end
 
