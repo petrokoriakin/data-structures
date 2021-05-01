@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'structures/list_stack'
+require 'structures/stack'
 
-RSpec.describe Structures::ListStack do
+RSpec.describe Structures::Stack do
   context 'when empty' do
     subject(:empty_stack) { described_class.new }
 
@@ -66,7 +66,7 @@ RSpec.describe Structures::ListStack do
     end
 
     describe '#search' do
-      it 'returns an index of elevent' do
+      it 'returns an index of element' do
         expect(stack.search(last_item)).to eq(1)
       end
     end

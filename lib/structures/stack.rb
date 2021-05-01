@@ -3,8 +3,8 @@
 require 'structures/doubly_linked_list'
 
 module Structures
-  # +Structures::ListStack+ represents a stack
-  class ListStack
+  # +Structures::Stack+ represents a stack
+  class Stack
     def initialize
       @list = Structures::DoublyLinkedList.new
     end
