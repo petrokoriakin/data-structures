@@ -12,5 +12,13 @@ module Structures
     def empty?
       @list.empty?
     end
+
+    def push(item); end
+
+    def pop; end
+
+    def peek; end
+
+    def search; end
   end
 end
