@@ -30,7 +30,7 @@ module Structures
     end
 
     def search(item)
-      @list.index_of(item);
+      @list.index_of(item)
     end
 
     def size
