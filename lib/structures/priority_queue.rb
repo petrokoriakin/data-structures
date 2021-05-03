@@ -18,11 +18,17 @@ module Structures
 
     # Returns the value of the element with the lowest
     # priority in this priority queue. If the priority
-    # queue is empty null is returned.
-    def peek; end
+    # queue is empty nil is returned.
+    def peek
+      return if empty?
+
+      @heap.first
+    end
 
     # Removes the root of the heap, O(log(n))
-    def poll; end
+    def poll
+      raise 'Empty Queue' if empty?
+    end
 
     # Test if an element is in heap, O(1)
     def containing?(value); end
@@ -30,6 +36,14 @@ module Structures
     # Adds an element to the priority queue, the
     # element must not be null, O(log(n))
     def add(value); end
+
+    # Removes a particular element in the heap, O(log(n))
+    def remove(item); end
+
+    # Removes a node at particular index, O(log(n))
+    def remove_at(index); end
+
+    private
 
     # Perform bottom up node swim, O(log(n))
     def swim(node); end
@@ -39,14 +53,6 @@ module Structures
 
     # Swap two nodes. Assumes indexes are valid, O(1)
     def swap(first_index, second_index); end
-
-    # Removes a particular element in the heap, O(log(n))
-    def remove(item); end
-
-    # Removes a node at particular index, O(log(n))
-    def remove_at(index); end
-
-    private
 
     # Add a node value and its index to the map
     def map_add(value, index); end
