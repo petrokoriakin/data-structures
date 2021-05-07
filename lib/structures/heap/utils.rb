@@ -25,9 +25,16 @@ module Structures
         child_index < heap_array.size && heap_array[node_index] > heap_array[child_index]
       end
 
+      def self.reporting_consistent_heap_map?(map, heap)
+        return true if heap.empty? && (map.empty? || map.values.map(&:empty?).uniq == [true])
+
+        map.keys.difference(heap).empty? && map.values.flatten.max == heap.size - 1
+      end
+
       def self.reporting_healthy?(priority_queue)
         heap_array = priority_queue.instance_variable_get(:@heap)
-        reporting_consistent_min_heap?(heap_array)
+        heap_map = priority_queue.instance_variable_get(:@map)
+        reporting_consistent_min_heap?(heap_array) && reporting_consistent_heap_map?(heap_map, heap_array)
       end
     end
   end
