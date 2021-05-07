@@ -46,7 +46,9 @@ module Structures
     end
 
     # Removes a particular element in the heap, O(log(n))
-    def remove(item); end
+    def remove(value)
+      remove_at(map_get(value))
+    end
 
     # Removes a node at particular index, O(log(n))
     def remove_at(index)
@@ -107,6 +109,7 @@ module Structures
     # Removes the index at a given value, O(log(n))
     def map_remove(value, index)
       @map[value] -= [index]
+      @map.delete(value) if @map[value].empty?
     end
 
     # Extract an index position for the given value

@@ -27,7 +27,7 @@ RSpec.describe Structures::PriorityQueue do
       expect(priority_queue.remove_at(0)).to eq(first_item)
     end
 
-    context 'after removal' do
+    context 'when executed' do
       before { priority_queue.remove_at(0) }
 
       it 'does not contain an item' do
@@ -50,7 +50,7 @@ RSpec.describe Structures::PriorityQueue do
       expect(queue.remove(last_item)).to eq(last_item)
     end
 
-    context 'after removal' do
+    context 'when executed' do
       before { queue.remove(last_item) }
 
       it 'does not contain an item' do
