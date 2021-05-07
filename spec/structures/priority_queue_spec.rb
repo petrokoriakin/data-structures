@@ -10,10 +10,15 @@ RSpec.describe Structures::PriorityQueue do
   end
 
   let(:first_item) { 13 }
+  let(:last_item) { 42 }
 
   describe '#containing?' do
     it 'returns true for existing element' do
       expect(priority_queue).to be_containing(first_item)
+    end
+
+    it 'returns false for other element' do
+      expect(priority_queue).not_to be_containing(last_item)
     end
   end
 
@@ -22,14 +27,39 @@ RSpec.describe Structures::PriorityQueue do
       expect(priority_queue.remove_at(0)).to eq(first_item)
     end
 
-    it 'removes data from the queue' do
-      priority_queue.remove_at(0)
-      expect(priority_queue).not_to be_containing(first_item)
+    context 'after removal' do
+      before { priority_queue.remove_at(0) }
+
+      it 'does not contain an item' do
+        expect(priority_queue).not_to be_containing(first_item)
+      end
+
+      it 'keeps both heap and map heallthy' do
+        expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
+      end
+    end
+  end
+
+  describe '#remove' do
+    subject(:queue) do
+      priority_queue.add(last_item)
+      priority_queue
     end
 
-    it 'keeps both heap and map heallthy' do
-      priority_queue.remove_at(0)
-      expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
+    it 'returns an item value' do
+      expect(queue.remove(last_item)).to eq(last_item)
+    end
+
+    context 'after removal' do
+      before { queue.remove(last_item) }
+
+      it 'does not contain an item' do
+        expect(queue).not_to be_containing(last_item)
+      end
+
+      it 'keeps itself healthy' do
+        expect(Structures::Heap::Utils).to be_reporting_healthy(queue)
+      end
     end
   end
 
