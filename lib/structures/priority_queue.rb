@@ -71,10 +71,14 @@ module Structures
       @heap.size - 1
     end
 
+    def less_and_valid?(first_index, second_index)
+      first_index.positive? && first_index < @heap.size && @heap[first_index] < @heap[second_index]
+    end
+
     # Perform bottom up node swim, O(log(n))
     def swim(index)
       parent_index = (index - 1) / 2
-      while index.positive? && @heap[index] < @heap[parent_index]
+      while less_and_valid?(index, parent_index)
         swap(parent_index, index)
         index = parent_index
         parent_index = (index - 1) / 2
@@ -87,7 +91,7 @@ module Structures
         left_child_index = 2 * index + 1
         right_child_index = 2 * index + 2
         smallest = left_child_index
-        smallest = right if right_child_index < @heap.size && @heap[right_child_index] < @heap[left_child_index]
+        smallest = right_child_index if less_and_valid?(right_child_index, left_child_index)
         break if left_child_index >= @heap.size || @heap[index] < @heap[smallest]
 
         swap(smallest, index)

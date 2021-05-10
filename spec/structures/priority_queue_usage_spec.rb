@@ -29,6 +29,24 @@ RSpec.describe Structures::PriorityQueue do
     end
   end
 
+  describe '#add' do
+    subject(:queue) do
+      priority_queue.add(124)
+      priority_queue.add(256)
+      priority_queue.add(64)
+      priority_queue.add(0)
+      priority_queue
+    end
+
+    it 'keeps queue in healthy state' do
+      expect(Structures::Heap::Utils).to be_reporting_healthy(queue)
+    end
+
+    it 'allows polling items' do
+      expect(queue.poll).to eq(0)
+    end
+  end
+
   it 'is defenitely healthy' do
     expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
   end

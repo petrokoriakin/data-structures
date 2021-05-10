@@ -12,6 +12,30 @@ RSpec.describe Structures::PriorityQueue do
   let(:first_item) { 13 }
   let(:last_item) { 42 }
 
+  describe '#size' do
+    it 'returns current size' do
+      expect(priority_queue.size).to eq(1)
+    end
+  end
+
+  describe '#peek' do
+    it 'returns an item' do
+      expect(priority_queue.peek).to eq(first_item)
+    end
+
+    context 'when executed' do
+      before { priority_queue.peek }
+
+      it 'does not remove an item' do
+        expect(priority_queue).to be_containing(first_item)
+      end
+
+      it 'keeps both heap and map heallthy' do
+        expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
+      end
+    end
+  end
+
   describe '#containing?' do
     it 'returns true for existing element' do
       expect(priority_queue).to be_containing(first_item)
