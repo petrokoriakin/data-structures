@@ -39,7 +39,7 @@ RSpec.describe Structures::PriorityQueue do
     end
 
     it 'keeps queue in healthy state' do
-      expect(Structures::Heap::Utils).to be_reporting_healthy(queue)
+      expect(queue).to be_healthy
     end
 
     it 'allows polling items' do
@@ -48,6 +48,6 @@ RSpec.describe Structures::PriorityQueue do
   end
 
   it 'is defenitely healthy' do
-    expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
+    expect(priority_queue).to be_healthy
   end
 end

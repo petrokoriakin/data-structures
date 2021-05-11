@@ -31,9 +31,7 @@ module Structures
       end
 
       def healthy?
-        heap_array = @heap
-        heap_map = @map
-        reporting_consistent_min_heap?(heap_array) && reporting_consistent_heap_map?(heap_map, heap_array)
+        consistent_min_heap?(@heap) && consistent_heap_map?(@map, @heap)
       end
     end
   end

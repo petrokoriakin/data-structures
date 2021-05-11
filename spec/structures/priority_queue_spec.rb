@@ -31,7 +31,7 @@ RSpec.describe Structures::PriorityQueue do
       end
 
       it 'keeps both heap and map heallthy' do
-        expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
+        expect(priority_queue).to be_healthy
       end
     end
   end
@@ -59,7 +59,7 @@ RSpec.describe Structures::PriorityQueue do
       end
 
       it 'keeps both heap and map heallthy' do
-        expect(Structures::Heap::Utils).to be_reporting_healthy(priority_queue)
+        expect(priority_queue).to be_healthy
       end
     end
   end
@@ -82,7 +82,7 @@ RSpec.describe Structures::PriorityQueue do
       end
 
       it 'keeps itself healthy' do
-        expect(Structures::Heap::Utils).to be_reporting_healthy(queue)
+        expect(queue).to be_healthy
       end
     end
   end
