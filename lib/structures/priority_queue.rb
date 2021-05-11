@@ -1,8 +1,12 @@
 # frozen_string_literal: true
 
+require 'structures/heap/health_checks'
+
 module Structures
   # +Structures::PriorityQueue+ represents a Queue
   class PriorityQueue
+    include Structures::Heap::HealthChecks
+
     def initialize
       @heap = []
       @map = Hash.new([])
